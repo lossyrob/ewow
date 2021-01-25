@@ -265,6 +265,12 @@ find_file()
     command_simple("^o", 0, 0)
 }
 
+;; new file (C-n)
+new_file()
+{
+    command_simple("^n", 0, 0)
+}
+
 ;; launch explorer (Win-e)
 dired()
 {
