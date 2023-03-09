@@ -209,16 +209,22 @@ DllCall("SetWinEventHook"
 ;; --------------
 
 ignored_frames = ConsoleWindowClass,cygwin/x X rl-xterm-XTerm-0,mintty,MEADOW,Vim,Emacs,XEmacs,SunAwtFrame,Xming X,VMPlayerFrame,VirtualConsoleClass,CASCADIA_HOSTING_WINDOW_CLASS,RAIL_WINDOW
+ignored_exes = Code.exe
 
 ;; decide if ewow should be quiet
 ignored_frame()
 { Global
     Local class
+    Local pname
     WinGetClass, class, A
+    WinGet, pname, ProcessName, A
     If class in %ignored_frames%
         Return 1
     Else
-        Return 0
+        If pname in %ignored_exes%
+            Return 1
+        Else
+            Return 0
 }
 
 ;; -----------------
